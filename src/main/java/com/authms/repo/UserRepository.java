@@ -1,5 +1,6 @@
 package com.authms.repo;
 
+import com.authms.model.RefreshToken;
 import com.authms.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

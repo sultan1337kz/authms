@@ -16,10 +16,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
+        this.tokenProvider = jwtTokenProvider;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String token = request.getHeader("Authorization");
+        String token = resolveTokenFromRequest(request.getHeader("Authorization"));
         if (token != null && tokenProvider.validateToken(token)) {
             String username = tokenProvider.getUsernameFromToken(token);
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
@@ -27,5 +31,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(request, response);
+    }
+
+    public String resolveTokenFromRequest(String token) {
+
+        if (token != null && token.startsWith("Bearer ")) {
+            return token.substring(7).trim(); // Remove extra spaces
+        }
+
+        return null;
     }
 }
