@@ -8,10 +8,15 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -29,9 +34,14 @@ public class JwtTokenProvider {
      */
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities()
+                .stream()
+                .map(auth -> new CustomGrantedAuthority(auth.getAuthority().replace("ROLE_", "")))  // Remove the "ROLE_" prefix
+                .collect(Collectors.toList());
 
         return Jwts.builder()
                 .setSubject(username)
+                .claim("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))  // Add roles
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key)
@@ -84,6 +94,18 @@ public class JwtTokenProvider {
         return claims.getSubject();
     }
 
+    public Collection<? extends GrantedAuthority> getAuthoritiesFromToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        List<String> roles = claims.get("roles", List.class);  // Extract roles from the JWT claim
+        return roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
 
     public String resolveTokenFromRequest(HttpServletRequest request) {
         String token = null;

@@ -1,0 +1,41 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# User-specific files
+.idea/*_user.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Gradle files
+.gradle/
+build/
+
+# Maven files
+target/
+
+# Node.js dependencies
+node_modules/
+
+# JetBrains IDEs, e.g. PhpStorm, WebStorm, PyCharm
+.idea/
+
+# Eclipse
+.project
+.classpath
+.idea
+
+# IntelliJ 2021+ specific
+.idea/.name
+.idea/.editorconfig

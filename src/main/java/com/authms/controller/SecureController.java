@@ -1,6 +1,8 @@
 package com.authms.controller;
 
 import com.authms.config.JwtTokenProvider;
+import com.authms.model.Role;
+import com.authms.util.Secured;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ public class SecureController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    @Secured(roles = {Role.USER})
     @GetMapping("/protected")
     public ResponseEntity<String> getProtectedResource(HttpServletRequest request) {
         // Get token from Authorization header

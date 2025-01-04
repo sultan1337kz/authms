@@ -1,6 +1,7 @@
 package com.authms.service;
 
 import com.authms.model.RegisterRequest;
+import com.authms.model.Role;
 import com.authms.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +39,7 @@ public class UserService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRoles(Set.of("USER"));
+        user.setRoles(Set.of(Role.ROLE_MANAGER.name()));
 
         userRepository.save(user);
         return "User registered successfully!";
