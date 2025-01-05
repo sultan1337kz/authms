@@ -1,41 +1,33 @@
-# IntelliJ IDEA
-.idea/
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
 *.iws
 *.iml
 *.ipr
 
-# User-specific files
-.idea/*_user.xml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/vcs.xml
-
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Gradle files
-.gradle/
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# Maven files
-target/
-
-# Node.js dependencies
-node_modules/
-
-# JetBrains IDEs, e.g. PhpStorm, WebStorm, PyCharm
-.idea/
-
-# Eclipse
-.project
-.classpath
-.idea
-
-# IntelliJ 2021+ specific
-.idea/.name
-.idea/.editorconfig
+### VS Code ###
+.vscode/

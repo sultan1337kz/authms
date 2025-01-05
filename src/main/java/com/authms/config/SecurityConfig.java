@@ -51,7 +51,9 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
-                                "/api/auth/**").permitAll() // Permit these paths without authentication
+                                "/api/auth/**",
+                                "/api/kafka/**"
+                        ).permitAll() // Permit these paths without authentication
                         .anyRequest().authenticated() // Other paths require authentication
                 )
                 .formLogin(form -> form.disable()) // Disable Spring Security's default login form
