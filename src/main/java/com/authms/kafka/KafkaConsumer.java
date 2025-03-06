@@ -1,7 +1,6 @@
 package com.authms.kafka;
 
-import com.authms.model.MyEvent;
-import lombok.Data;
+import com.authms.model.kafka.MyEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

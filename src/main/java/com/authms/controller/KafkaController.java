@@ -1,7 +1,7 @@
 package com.authms.controller;
 
 import com.authms.kafka.KafkaProducer;
-import com.authms.model.MyEvent;
+import com.authms.model.kafka.MyEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

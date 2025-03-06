@@ -52,6 +52,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
                                 "/api/auth/**",
+                                "/api/books/**",
                                 "/api/kafka/**"
                         ).permitAll() // Permit these paths without authentication
                         .anyRequest().authenticated() // Other paths require authentication

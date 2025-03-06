@@ -1,4 +1,4 @@
-package com.authms.model;
+package com.authms.model.kafka;
 
 import lombok.Data;
 
